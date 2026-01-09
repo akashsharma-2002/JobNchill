@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#EC4899;stop-opacity:0.1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bg)"/>
+  
+  <!-- Illustration placeholder -->
+  <circle cx="400" cy="300" r="200" fill="none" stroke="#8B5CF6" stroke-width="2" opacity="0.6"/>
+  <circle cx="400" cy="300" r="150" fill="none" stroke="#EC4899" stroke-width="2" opacity="0.6"/>
+  <circle cx="400" cy="300" r="100" fill="none" stroke="#8B5CF6" stroke-width="2" opacity="0.8"/>
+  
+  <!-- Text -->
+  <text x="400" y="320" font-family="Sora, sans-serif" font-size="32" text-anchor="middle" fill="#8B5CF6" opacity="0.9">JobNchill</text>
+</svg>

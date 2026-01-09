@@ -38,7 +38,11 @@ $pyInstallerArgs = @(
     "--distpath", "dist",
     "--workpath", "build",
     "--specpath", ".",
-    "app\desktop.py"
+    "--onefile",
+    "--collect-all", "playwright",
+    "--collect-all", "fastapi",
+    "--collect-all", "uvicorn",
+    "app\main.py"
 )
 
 # Add optional data directories if they exist
@@ -47,9 +51,19 @@ if (Test-Path "static") {
     $pyInstallerArgs += @("--add-data", "static;static")
 }
 
+if (Test-Path "templates") {
+    Write-Host "[*] Including templates..." -ForegroundColor Cyan
+    $pyInstallerArgs += @("--add-data", "templates;templates")
+}
+
 if (Test-Path "extension") {
     Write-Host "[*] Including extension files..." -ForegroundColor Cyan
     $pyInstallerArgs += @("--add-data", "extension;extension")
+}
+
+if (Test-Path "app") {
+    Write-Host "[*] Including app configuration..." -ForegroundColor Cyan
+    $pyInstallerArgs += @("--add-data", "app;app")
 }
 
 # Run PyInstaller

@@ -28,10 +28,10 @@ jobs:
       - name: Check if build directory exists
         run: |
           if (Test-Path ".\dist\JobNchill") {
-            Write-Host "✅ Build directory found!"
+            Write-Host "[+] Build directory found!"
             Get-ChildItem -Path ".\dist\JobNchill" -Recurse | Select-Object FullName
           } else {
-            Write-Host "❌ Build directory not found!"
+            Write-Host "[-] Build directory not found!"
             exit 1
           }
 
@@ -39,9 +39,9 @@ jobs:
         run: |
           if (Test-Path ".\dist\JobNchill") {
             powershell -Command "Compress-Archive -Path '.\dist\JobNchill\*' -DestinationPath '.\dist\JobNchill-win.zip' -Force"
-            Write-Host "✅ Artifact packaged successfully!"
+            Write-Host "[+] Artifact packaged successfully!"
           } else {
-            Write-Host "❌ Cannot create archive - source directory not found!"
+            Write-Host "[-] Cannot create archive - source directory not found!"
             exit 1
           }
 

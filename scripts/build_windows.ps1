@@ -1,8 +1,8 @@
 # Build script for Windows
-Write-Host "🔨 Building JobNchill for Windows..." -ForegroundColor Green
+Write-Host "[*] Building JobNchill for Windows..." -ForegroundColor Green
 
 # Install dependencies
-Write-Host "📦 Installing dependencies..." -ForegroundColor Cyan
+Write-Host "[*] Installing dependencies..." -ForegroundColor Cyan
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 python -m pip install pyinstaller
@@ -13,7 +13,7 @@ if (!(Test-Path "dist")) {
 }
 
 # Build the executable
-Write-Host "🏗️  Building executable..." -ForegroundColor Cyan
+Write-Host "[*] Building executable..." -ForegroundColor Cyan
 pyinstaller `
   --name JobNchill `
   --noconfirm `
@@ -27,9 +27,9 @@ pyinstaller `
   app\desktop.py
 
 if ($LASTEXITCODE -eq 0) {
-    Write-Host "✅ Build completed successfully!" -ForegroundColor Green
-    Write-Host "📁 Executable location: dist\JobNchill\JobNchill.exe" -ForegroundColor Green
+    Write-Host "[+] Build completed successfully!" -ForegroundColor Green
+    Write-Host "[+] Executable location: dist\JobNchill\JobNchill.exe" -ForegroundColor Green
 } else {
-    Write-Host "❌ Build failed!" -ForegroundColor Red
+    Write-Host "[-] Build failed!" -ForegroundColor Red
     exit 1
 }

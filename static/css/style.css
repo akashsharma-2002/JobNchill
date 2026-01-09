@@ -276,6 +276,27 @@ body::before {
     animation: slideInLeft 0.8s ease-out 0.3s backwards;
 }
 
+.download-trust {
+    background: rgba(34, 197, 94, 0.08);
+    border-left: 4px solid #22c55e;
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+    animation: slideInLeft 0.8s ease-out 0.4s backwards;
+}
+
+.download-trust p {
+    color: var(--muted-text);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.download-trust strong {
+    color: #22c55e;
+    font-weight: 600;
+}
+
 .hero-bg {
     position: relative;
     height: 100%;

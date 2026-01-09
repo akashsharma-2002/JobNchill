@@ -29,16 +29,31 @@ New-Item -ItemType Directory -Path "dist" | Out-Null
 
 # Build the executable
 Write-Host "[*] Building executable..." -ForegroundColor Cyan
-pyinstaller `
-  --name JobNchill `
-  --noconfirm `
-  --windowed `
-  --distpath "dist" `
-  --workpath "build" `
-  --specpath "." `
-  --add-data "static;static" `
-  --add-data "extension;extension" `
-  app\desktop.py
+
+# Build PyInstaller command with optional data files
+$pyInstallerArgs = @(
+    "--name", "JobNchill",
+    "--noconfirm",
+    "--windowed",
+    "--distpath", "dist",
+    "--workpath", "build",
+    "--specpath", ".",
+    "app\desktop.py"
+)
+
+# Add optional data directories if they exist
+if (Test-Path "static") {
+    Write-Host "[*] Including static files..." -ForegroundColor Cyan
+    $pyInstallerArgs += @("--add-data", "static;static")
+}
+
+if (Test-Path "extension") {
+    Write-Host "[*] Including extension files..." -ForegroundColor Cyan
+    $pyInstallerArgs += @("--add-data", "extension;extension")
+}
+
+# Run PyInstaller
+& pyinstaller @pyInstallerArgs
 
 if ($LASTEXITCODE -eq 0) {
     Write-Host "[+] Build completed successfully!" -ForegroundColor Green

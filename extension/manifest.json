@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "JobNchill Autofill",
+  "version": "0.1.3",
+  "description": "Assisted apply autofill for JobNchill.",
+  "icons": {
+    "128": "icon.png"
+  },
+  "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": [
+    "http://localhost:8000/*",
+    "https://*.linkedin.com/*",
+    "https://*.naukri.com/*",
+    "https://*.indeed.com/*"
+  ],
+  "action": {
+    "default_title": "JobNchill Autofill",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": ["https://*/*", "http://*/*"],
+      "js": ["content.js"]
+    }
+  ]
+}

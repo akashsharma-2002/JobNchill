@@ -12,6 +12,21 @@ if (!(Test-Path "dist")) {
     New-Item -ItemType Directory -Path "dist" | Out-Null
 }
 
+# Clean up old builds
+Write-Host "[*] Cleaning up old builds..." -ForegroundColor Cyan
+if (Test-Path "build") {
+    Remove-Item -Path "build" -Recurse -Force | Out-Null
+}
+if (Test-Path "dist") {
+    Remove-Item -Path "dist" -Recurse -Force | Out-Null
+}
+if (Test-Path "JobNchill.spec") {
+    Remove-Item -Path "JobNchill.spec" -Force | Out-Null
+}
+
+# Recreate dist directory
+New-Item -ItemType Directory -Path "dist" | Out-Null
+
 # Build the executable
 Write-Host "[*] Building executable..." -ForegroundColor Cyan
 pyinstaller `

@@ -27,21 +27,30 @@ jobs:
 
       - name: Check if build directory exists
         run: |
-          if (Test-Path ".\dist\JobNchill") {
+          if (Test-Path ".\dist\JobNchill.exe") {
+            Write-Host "[+] Single executable found!"
+            $fileSize = (Get-Item '.\dist\JobNchill.exe').Length / 1MB
+            Write-Host "[+] File size: $fileSize MB"
+          } elseif (Test-Path ".\dist\JobNchill") {
             Write-Host "[+] Build directory found!"
             Get-ChildItem -Path ".\dist\JobNchill" -Recurse | Select-Object FullName
           } else {
-            Write-Host "[-] Build directory not found!"
+            Write-Host "[-] Build output not found!"
+            Write-Host "Checking dist directory contents:"
+            Get-ChildItem -Path ".\dist" -Recurse
             exit 1
           }
 
       - name: Package artifact
         run: |
-          if (Test-Path ".\dist\JobNchill") {
+          if (Test-Path ".\dist\JobNchill.exe") {
+            powershell -Command "Compress-Archive -Path '.\dist\JobNchill.exe' -DestinationPath '.\dist\JobNchill-win.zip' -Force"
+            Write-Host "[+] Artifact packaged successfully!"
+          } elseif (Test-Path ".\dist\JobNchill") {
             powershell -Command "Compress-Archive -Path '.\dist\JobNchill\*' -DestinationPath '.\dist\JobNchill-win.zip' -Force"
             Write-Host "[+] Artifact packaged successfully!"
           } else {
-            Write-Host "[-] Cannot create archive - source directory not found!"
+            Write-Host "[-] Cannot create archive - build output not found!"
             exit 1
           }
 

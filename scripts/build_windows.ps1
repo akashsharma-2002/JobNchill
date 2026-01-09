@@ -71,7 +71,20 @@ if (Test-Path "app") {
 
 if ($LASTEXITCODE -eq 0) {
     Write-Host "[+] Build completed successfully!" -ForegroundColor Green
-    Write-Host "[+] Executable location: dist\JobNchill\JobNchill.exe" -ForegroundColor Green
+    
+    # Check for executable
+    if (Test-Path "dist\JobNchill.exe") {
+        Write-Host "[+] Executable location: dist\JobNchill.exe" -ForegroundColor Green
+        Write-Host "[+] File size: $((Get-Item 'dist\JobNchill.exe').Length / 1MB)MB" -ForegroundColor Cyan
+    } elseif (Test-Path "dist\JobNchill\JobNchill.exe") {
+        Write-Host "[+] Executable location: dist\JobNchill\JobNchill.exe" -ForegroundColor Green
+        Write-Host "[+] File size: $((Get-Item 'dist\JobNchill\JobNchill.exe').Length / 1MB)MB" -ForegroundColor Cyan
+    } else {
+        Write-Host "[-] Executable not found in expected location!" -ForegroundColor Red
+        Write-Host "[*] Checking dist directory..." -ForegroundColor Cyan
+        Get-ChildItem -Path "dist" -Recurse
+        exit 1
+    }
 } else {
     Write-Host "[-] Build failed!" -ForegroundColor Red
     exit 1

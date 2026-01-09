@@ -42,28 +42,39 @@ $pyInstallerArgs = @(
     "--collect-all", "playwright",
     "--collect-all", "fastapi",
     "--collect-all", "uvicorn",
+    "--collect-all", "sqlalchemy",
+    "--collect-all", "pydantic",
+    "--collect-all", "pydantic_core",
+    "--collect-all", "starlette",
+    "--hidden-import=uvicorn.lifespan",
+    "--hidden-import=uvicorn.loops",
+    "--hidden-import=uvicorn.protocols",
+    "--hidden-import=uvicorn.workers",
+    "--hidden-import=fastapi",
+    "--hidden-import=pydantic",
+    "--hidden-import=sqlalchemy.ext.declarative",
     "app\main.py"
 )
 
 # Add optional data directories if they exist
 if (Test-Path "static") {
     Write-Host "[*] Including static files..." -ForegroundColor Cyan
-    $pyInstallerArgs += @("--add-data", "static;static")
+    $pyInstallerArgs += @("--add-data", "static:static")
 }
 
 if (Test-Path "templates") {
     Write-Host "[*] Including templates..." -ForegroundColor Cyan
-    $pyInstallerArgs += @("--add-data", "templates;templates")
+    $pyInstallerArgs += @("--add-data", "templates:templates")
 }
 
 if (Test-Path "extension") {
     Write-Host "[*] Including extension files..." -ForegroundColor Cyan
-    $pyInstallerArgs += @("--add-data", "extension;extension")
+    $pyInstallerArgs += @("--add-data", "extension:extension")
 }
 
 if (Test-Path "app") {
-    Write-Host "[*] Including app configuration..." -ForegroundColor Cyan
-    $pyInstallerArgs += @("--add-data", "app;app")
+    Write-Host "[*] Including app modules..." -ForegroundColor Cyan
+    $pyInstallerArgs += @("--add-data", "app:app")
 }
 
 # Run PyInstaller

@@ -25,12 +25,29 @@ jobs:
         run: |
           powershell -ExecutionPolicy Bypass -File .\scripts\build_windows.ps1
 
+      - name: Check if build directory exists
+        run: |
+          if (Test-Path ".\dist\JobNchill") {
+            Write-Host "✅ Build directory found!"
+            Get-ChildItem -Path ".\dist\JobNchill" -Recurse | Select-Object FullName
+          } else {
+            Write-Host "❌ Build directory not found!"
+            exit 1
+          }
+
       - name: Package artifact
         run: |
-          powershell -Command "Compress-Archive -Path .\\dist\\JobNchill\\* -DestinationPath .\\dist\\JobNchill-win.zip"
+          if (Test-Path ".\dist\JobNchill") {
+            powershell -Command "Compress-Archive -Path '.\dist\JobNchill\*' -DestinationPath '.\dist\JobNchill-win.zip' -Force"
+            Write-Host "✅ Artifact packaged successfully!"
+          } else {
+            Write-Host "❌ Cannot create archive - source directory not found!"
+            exit 1
+          }
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: JobNchill-win
           path: dist/JobNchill-win.zip
+          if-no-files-found: error

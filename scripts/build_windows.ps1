@@ -21,7 +21,6 @@ pyinstaller `
   --distpath "dist" `
   --workpath "build" `
   --specpath "." `
-  --add-data "templates;templates" `
   --add-data "static;static" `
   --add-data "extension;extension" `
   app\desktop.py

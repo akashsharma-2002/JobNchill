@@ -19,7 +19,7 @@ pyinstaller `
   --noconfirm `
   --windowed `
   --distpath "dist" `
-  --buildpath "build" `
+  --workpath "build" `
   --specpath "." `
   --add-data "templates;templates" `
   --add-data "static;static" `

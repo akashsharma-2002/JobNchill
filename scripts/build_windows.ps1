@@ -45,14 +45,23 @@ $pyInstallerArgs = @(
     "--collect-all", "sqlalchemy",
     "--collect-all", "pydantic",
     "--collect-all", "pydantic_core",
+    "--collect-all", "pydantic_settings",
     "--collect-all", "starlette",
+    "--collect-all", "requests",
+    "--collect-all", "beautifulsoup4",
     "--hidden-import=uvicorn.lifespan",
     "--hidden-import=uvicorn.loops",
     "--hidden-import=uvicorn.protocols",
     "--hidden-import=uvicorn.workers",
     "--hidden-import=fastapi",
     "--hidden-import=pydantic",
+    "--hidden-import=pydantic_settings",
     "--hidden-import=sqlalchemy.ext.declarative",
+    "--hidden-import=app.config",
+    "--hidden-import=app.database",
+    "--hidden-import=app.api",
+    "--hidden-import=app.services",
+    "--hidden-import=app.utils",
     "app\main.py"
 )
 

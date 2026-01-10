@@ -25,6 +25,7 @@ pyinstaller \
   --workpath "build" \
   --specpath "." \
   --collect-all "playwright" \
+  --collect-all "cryptography" \
   --collect-all "fastapi" \
   --collect-all "uvicorn" \
   --collect-all "sqlalchemy" \
@@ -34,6 +35,17 @@ pyinstaller \
   --collect-all "starlette" \
   --collect-all "requests" \
   --collect-all "beautifulsoup4" \
+  --collect-all "jinja2" \
+  --collect-all "aiofiles" \
+  --collect-all "multipart" \
+  --collect-all "lxml" \
+  --collect-all "pdf2image" \
+  --collect-all "pptx" \
+  --collect-all "docx" \
+  --collect-all "PIL" \
+  --collect-all "schedule" \
+  --collect-all "psutil" \
+  --collect-all "dotenv" \
   --hidden-import=uvicorn.lifespan \
   --hidden-import=uvicorn.loops \
   --hidden-import=uvicorn.protocols \
@@ -47,6 +59,7 @@ pyinstaller \
   --hidden-import=app.api \
   --hidden-import=app.services \
   --hidden-import=app.utils \
+  --hidden-import=cryptography \
   --add-data "templates:templates" \
   --add-data "static:static" \
   --add-data "extension:extension" \
